@@ -2,9 +2,49 @@
 <html>
 <head>
     <title>Bodhi AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial; margin: 20px; background: #f0f0f0; }
+        .chat { max-width: 400px; margin: 50px auto; background: white; padding: 20px; border-radius: 10px; }
+        .message { margin: 10px 0; padding: 10px; border-radius: 10px; }
+        .user { background: #007bff; color: white; }
+        .ai { background: #f0f0f0; }
+        input, button { padding: 10px; margin: 5px; }
+    </style>
 </head>
 <body>
-    <h1>🪷 Bodhi AI - Live!</h1>
-    <p>Vanakkam! Your creative companion is ready!</p>
+    <div class="chat">
+        <h1>🪷 Bodhi AI</h1>
+        <div id="messages">
+            <div class="message ai">🪷 Vanakkam! I'm Bodhi AI!</div>
+        </div>
+        <input type="text" id="input" placeholder="Ask me...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('input');
+            const messages = document.getElementById('messages');
+            const text = input.value;
+            
+            if (text) {
+                // Add user message
+                messages.innerHTML += `<div class="message user">${text}</div>`;
+                input.value = '';
+                
+                // AI response
+                setTimeout(() => {
+                    const responses = [
+                        "Vanakkam! Learning is like building with LEGO! 🧱",
+                        "Vanakkam! Creativity flows like a river! 🌊",
+                        "Vanakkam! Ask me for more analogies! 💡"
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    messages.innerHTML += `<div class="message ai">${randomResponse}</div>`;
+                }, 1000);
+            }
+        }
+    </script>
 </body>
 </html>
