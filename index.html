@@ -51,13 +51,15 @@
                     var aiMsg = document.createElement('div');
                     aiMsg.className = 'message ai';
                     
-                    if (message.toLowerCase().includes('analogy')) {
-                        aiMsg.textContent = 'Vanakkam! Learning is like a river - it flows and grows! 🌊';
-                    } else if (message.toLowerCase().includes('hello')) {
-                        aiMsg.textContent = '🪷 Vanakkam! How can I help you today?';
-                    } else {
-                        aiMsg.textContent = '💡 Vanakkam! Try asking for an analogy!';
-                    }
+      if (message.toLowerCase().includes('analogy')) {
+    aiMsg.textContent = 'Vanakkam! Learning is like a river - it flows and grows! 🌊';
+} else if (message.toLowerCase().includes('image') || message.toLowerCase().includes('generate') || message.toLowerCase().includes('picture')) {
+    aiMsg.textContent = '🎨 Vanakkam! I will generate: ' + message + ' (Image generation coming soon!)';
+} else if (message.toLowerCase().includes('hello')) {
+    aiMsg.textContent = '🪷 Vanakkam! How can I help you today?';
+} else {
+    aiMsg.textContent = '💡 Vanakkam! Try asking for an analogy or image generation!';
+}
                     
                     chatArea.appendChild(aiMsg);
                     chatArea.scrollTop = chatArea.scrollHeight;
