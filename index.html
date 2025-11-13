@@ -2,49 +2,75 @@
 <html>
 <head>
     <title>Bodhi AI</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body { font-family: Arial; margin: 20px; background: #f0f0f0; }
-        .chat { max-width: 400px; margin: 50px auto; background: white; padding: 20px; border-radius: 10px; }
-        .message { margin: 10px 0; padding: 10px; border-radius: 10px; }
-        .user { background: #007bff; color: white; }
-        .ai { background: #f0f0f0; }
-        input, button { padding: 10px; margin: 5px; }
+        .container { max-width: 400px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; }
+        .header { background: #FF9933; color: white; padding: 15px; border-radius: 10px; text-align: center; }
+        .chat-area { height: 300px; border: 1px solid #ddd; margin: 10px 0; padding: 10px; overflow-y: auto; }
+        .message { margin: 5px 0; padding: 8px; border-radius: 5px; }
+        .user { background: #007bff; color: white; text-align: right; }
+        .ai { background: #e0e0e0; }
+        input { width: 70%; padding: 8px; }
+        button { padding: 8px 15px; background: #FF9933; color: white; border: none; border-radius: 5px; }
     </style>
 </head>
 <body>
-    <div class="chat">
-        <h1>🪷 Bodhi AI</h1>
-        <div id="messages">
-            <div class="message ai">🪷 Vanakkam! I'm Bodhi AI!</div>
+    <div class="container">
+        <div class="header">
+            <h2>🪷 Bodhi AI</h2>
+            <p>Vanakkam! Chat with me</p>
         </div>
-        <input type="text" id="input" placeholder="Ask me...">
-        <button onclick="sendMessage()">Send</button>
+        
+        <div class="chat-area" id="chatArea">
+            <div class="message ai">🪷 Vanakkam! I'm Bodhi AI. Ask me for creative analogies!</div>
+        </div>
+        
+        <div>
+            <input type="text" id="userInput" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
     </div>
 
     <script>
         function sendMessage() {
-            const input = document.getElementById('input');
-            const messages = document.getElementById('messages');
-            const text = input.value;
+            var input = document.getElementById('userInput');
+            var chatArea = document.getElementById('chatArea');
+            var message = input.value;
             
-            if (text) {
+            if (message) {
                 // Add user message
-                messages.innerHTML += `<div class="message user">${text}</div>`;
+                var userMsg = document.createElement('div');
+                userMsg.className = 'message user';
+                userMsg.textContent = message;
+                chatArea.appendChild(userMsg);
+                
                 input.value = '';
                 
                 // AI response
-                setTimeout(() => {
-                    const responses = [
-                        "Vanakkam! Learning is like building with LEGO! 🧱",
-                        "Vanakkam! Creativity flows like a river! 🌊",
-                        "Vanakkam! Ask me for more analogies! 💡"
-                    ];
-                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                    messages.innerHTML += `<div class="message ai">${randomResponse}</div>`;
-                }, 1000);
+                setTimeout(function() {
+                    var aiMsg = document.createElement('div');
+                    aiMsg.className = 'message ai';
+                    
+                    if (message.toLowerCase().includes('analogy')) {
+                        aiMsg.textContent = 'Vanakkam! Learning is like a river - it flows and grows! 🌊';
+                    } else if (message.toLowerCase().includes('hello')) {
+                        aiMsg.textContent = '🪷 Vanakkam! How can I help you today?';
+                    } else {
+                        aiMsg.textContent = '💡 Vanakkam! Try asking for an analogy!';
+                    }
+                    
+                    chatArea.appendChild(aiMsg);
+                    chatArea.scrollTop = chatArea.scrollHeight;
+                }, 500);
             }
         }
+        
+        // Enter key support
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
     </script>
 </body>
 </html>
